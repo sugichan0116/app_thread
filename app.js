@@ -1,3 +1,8 @@
+// import { ref } from 'vue'
+
+import {projectFirestore} from './firebase/config'
+
+
 var app = new Vue({
     el: '#app',
     data: {
@@ -140,10 +145,16 @@ Vue.component('custom-input', {
   `
 })
 
-new Vue({
+var fire = new Vue({
     el: '#components-demo',
     data: {
-        searchText: "Google"
+        searchText: "Google",
+        text: "none",
     }
 
 })
+
+const res = await projectFirestore.collection('posts')
+    .get()
+
+fire.text = res
